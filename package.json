@@ -13,5 +13,6 @@
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
+  "type": "module",
   "main": "index.js"
 }
