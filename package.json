@@ -15,5 +15,10 @@
     "gendiff": "bin/gendiff.js"
   },
   "type": "module",
-  "main": "index.js"
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1"
+  }
 }

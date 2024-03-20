@@ -11,4 +11,4 @@ program
   .option('-f, --format [type]', 'output format')
   .action((file1, file2) => console.log(gendiff(file1, file2)));
 
-  program.parse();
+program.parse();
