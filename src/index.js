@@ -1,9 +1,9 @@
-import path from 'node:path';
+import path from 'path';
 // import cwd from 'node:process';
 import fs from 'fs';
 import _ from 'lodash';
 
-const getFile = (file) => JSON.parse(fs.readFileSync(path.resolve(file)));
+const getFile = (file) => JSON.parse(fs.readFileSync(path.resolve('./__fixtures__', file)));
 
 const gendiff = (filepath1, filepath2) => {
   const file1 = getFile(filepath1);
