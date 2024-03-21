@@ -11,5 +11,5 @@ make lint:
 				npx eslint .
 make test:
 				npm test
-make report:
-				./gradlew jacocoTestReport
+test-coverage:
+				npm test -- --coverage --coverageProvider=v8
