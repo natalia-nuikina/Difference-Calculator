@@ -1,13 +1,12 @@
-import path from 'path';
+// import path from 'path';
 // import cwd from 'node:process';
-import fs from 'fs';
+// import fs from 'fs';
 import _ from 'lodash';
-
-const getFile = (file) => JSON.parse(fs.readFileSync(path.resolve('./__fixtures__', file)));
+import parseFile from './parsers.js';
 
 const gendiff = (filepath1, filepath2) => {
-  const file1 = getFile(filepath1);
-  const file2 = getFile(filepath2);
+  const file1 = parseFile(filepath1);
+  const file2 = parseFile(filepath2);
   const keys = _.union(Object.keys(file1), Object.keys(file2));
   const sortedKeys = keys.sort((a, b) => a.localeCompare(b));
   const tab = '  ';
