@@ -15,3 +15,23 @@ jobs:
         run: make lint
       - name: run tests
         run: make test
+      - name: Test & publish code coverage
+        # Publish code coverage on Code Climate
+        # https://github.com/paambaati/codeclimate-action
+        uses: paambaati/codeclimate-action@v5.0.0
+        # Add Code Climate secret key
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          # JACOCO_SOURCE_PATH: app/src/main/java
+        with:
+          coverageCommand: make test-coverage
+          debug: true
+      
+        #   - name: Publish code coverage
+        # uses: paambaati/codeclimate-action@v5.0.0
+        # env:
+        #   CC_TEST_REPORTER_ID: {{secrets.CC_TEST_REPORTER_ID}}
+          
+        # with:
+        #   coverageCommand: make report
+        #   coverageLocations: {{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
