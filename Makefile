@@ -11,3 +11,5 @@ make lint:
 				npx eslint .
 make test:
 				npm test
+make report:
+				./gradlew jacocoTestReport
