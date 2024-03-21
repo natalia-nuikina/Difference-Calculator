@@ -9,9 +9,9 @@ jobs:
       # Устанавливаем Node.js
       - uses: actions/setup-node@v3
       # Ставим зависимости
-      - run: install
+      - run: npm install
       # Запускаем линтер
       - name: run lint
-        run: make lint
+        run: npm run lint
       - name: run tests
-        run: make test 
+        run: npm test
