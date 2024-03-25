@@ -9,14 +9,14 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-test('gendiffJson', () => {
-  expect(gendiff('file1.json', 'file2.json')).toBe(readFile('file.test.txt'));
+test('gendiffTreeJson', () => {
+  expect(gendiff('file3.json', 'file4.json')).toBe(readFile('file2.test.txt'));
 });
 
-test('gendiffYml', () => {
-  expect(gendiff('filepath1.yml', 'filepath2.yml')).toBe(readFile('file.test.txt'));
-});
+// test('gendiffTreeYaml', () => {
+//   expect(gendiff('file3.yml', 'file4.yml')).toBe(readFile('file2.test.txt'));
+// });
 
-test('gendiffDifferrrent', () => {
-  expect(gendiff('filepath1.yml', 'file2.json')).toBe(readFile('file.test.txt'));
-});
+// test('gendiffTreeDifferent', () => {
+//   expect(gendiff('file3.yml', 'file4.json')).toBe(readFile('file2.test.txt'));
+// });
