@@ -13,10 +13,10 @@ test('gendiffTreeJson', () => {
   expect(gendiff('file3.json', 'file4.json')).toBe(readFile('file2.test.txt'));
 });
 
-// test('gendiffTreeYaml', () => {
-//   expect(gendiff('file3.yml', 'file4.yml')).toBe(readFile('file2.test.txt'));
-// });
+test('gendiffTreeYaml', () => {
+  expect(gendiff('file3.yml', 'file4.yml')).toBe(readFile('file2.test.txt'));
+});
 
-// test('gendiffTreeDifferent', () => {
-//   expect(gendiff('file3.yml', 'file4.json')).toBe(readFile('file2.test.txt'));
-// });
+test('gendiffTreeDifferent', () => {
+  expect(gendiff('file3.yml', 'file4.json')).toBe(readFile('file2.test.txt'));
+});
