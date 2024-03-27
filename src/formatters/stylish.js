@@ -34,13 +34,13 @@ const stylish = (file1, file2, differents, replacer = '  ', spacesCount = 2) => 
         const curValue1 = currentFile1[key];
         const curValue2 = currentFile2[key];
 
-        if (diff[key] === 'deleted') {
+        if (diff[key] === 'removed') {
           res += getLine(indent, key, charMinus, toString(curValue1, depth));
         } else if (diff[key] === 'added') {
           res += getLine(indent, key, charPlus, toString(curValue2, depth));
         } else if (diff[key] === 'unchanged') {
           res += getLine(indent, key, charNull, toString(curValue1, depth));
-        } else if (diff[key] === 'changed') {
+        } else if (diff[key] === 'updated') {
           res += getLine(indent, key, charMinus, toString(curValue1, depth));
           res += getLine(indent, key, charPlus, toString(curValue2, depth));
         } else if (_.isObject(diff[key])) {

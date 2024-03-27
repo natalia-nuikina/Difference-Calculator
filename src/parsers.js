@@ -1,14 +1,7 @@
 import path from 'path';
-// import cwd from 'node:process';
 import fs from 'fs';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import yaml from 'js-yaml';
-
-// const configPath = 'path/to/eslint';
-// const format = path.extname(configPath);
-// const data = fs.readSync(configPath);
-
-// Выбирается функция-парсер в зависимости от расширения файла
 
 const parseFile = (file) => {
   const format = path.extname(file);

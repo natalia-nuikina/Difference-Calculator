@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import parseFile from './parsers.js';
-import stylish from './stylish.js';
+import stylish from './formatters/stylish.js';
+import plain from './formatters/plain.js';
 
-const gendiff = (filepath1, filepath2, formater = stylish) => {
+const gendiff = (filepath1, filepath2, formatName = stylish) => {
   const currentFile1 = parseFile(filepath1);
   const currentFile2 = parseFile(filepath2);
 
@@ -15,7 +16,7 @@ const gendiff = (filepath1, filepath2, formater = stylish) => {
       const currentValue2 = file2[key];
 
       if (Object.hasOwn(file1, key) && !Object.hasOwn(file2, key)) {
-        result[key] = 'deleted';
+        result[key] = 'removed';
       } else if (!Object.hasOwn(file1, key) && Object.hasOwn(file2, key)) {
         result[key] = 'added';
       } else if (Object.hasOwn(file1, key) && Object.hasOwn(file2, key)) {
@@ -25,7 +26,7 @@ const gendiff = (filepath1, filepath2, formater = stylish) => {
         } else if (currentValue1 === currentValue2) {
           result[key] = 'unchanged';
         } else if (currentValue1 !== currentValue2) {
-          result[key] = 'changed';
+          result[key] = 'updated';
         }
       }
       return key;
@@ -33,7 +34,8 @@ const gendiff = (filepath1, filepath2, formater = stylish) => {
     return result;
   };
   const diff = iter(currentFile1, currentFile2);
-  const result = formater(currentFile1, currentFile2, diff);
+  // console.log(diff)
+  const result = formatName(currentFile1, currentFile2, diff);
   return result;
 };
 
