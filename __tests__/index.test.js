@@ -5,16 +5,20 @@ import { getFixturePath } from '../src/helpers.js';
 
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-const diff = gendiff('file3.json', 'file4.json');
+const file1 = getFixturePath('file3.json');
+const file2 = getFixturePath('file4.json');
+const file3 = getFixturePath('file3.yml');
+const file4 = getFixturePath('file4.yml');
+const diff = gendiff(getFixturePath('file3.json'), getFixturePath('file4.json'));
 
 test('gendiffStylish', () => {
-  expect(chooseFormater('file3.json', 'file4.json', diff, 'stylish')).toBe(readFile('file2.test.txt'));
-  expect(chooseFormater('file3.yml', 'file4.yml', diff, 'stylish')).toBe(readFile('file2.test.txt'));
-  expect(chooseFormater('file3.yml', 'file4.json', diff, 'stylish')).toBe(readFile('file2.test.txt'));
+  expect(chooseFormater(file1, file2, diff, 'stylish')).toBe(readFile('file2.test.txt'));
+  expect(chooseFormater(file3, file4, diff, 'stylish')).toBe(readFile('file2.test.txt'));
+  expect(chooseFormater(file1, file4, diff, 'stylish')).toBe(readFile('file2.test.txt'));
 });
 
 test('gendiffPlain', () => {
-  expect(chooseFormater('file3.json', 'file4.json', diff, 'plain')).toBe(readFile('plain.test.txt'));
-  expect(chooseFormater('file3.yml', 'file4.yml', diff, 'plain')).toBe(readFile('plain.test.txt'));
-  expect(chooseFormater('file3.yml', 'file4.json', diff, 'plain')).toBe(readFile('plain.test.txt'));
+  expect(chooseFormater(file1, file2, diff, 'plain')).toBe(readFile('plain.test.txt'));
+  expect(chooseFormater(file3, file4, diff, 'plain')).toBe(readFile('plain.test.txt'));
+  expect(chooseFormater(file1, file4, diff, 'plain')).toBe(readFile('plain.test.txt'));
 });

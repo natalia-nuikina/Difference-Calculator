@@ -1,12 +1,15 @@
 import _ from 'lodash';
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+import { dirname, join, resolve } from 'path';
+import fs from 'fs';
 
 export const getFixturePath = (filename) => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
   return join(__dirname, '..', '__fixtures__', filename);
 };
+
+export const readFile = (file) => fs.readFileSync(resolve(process.cwd(), file));
 
 export const getLine = (currentIndent, key, char, funct) => `\n${currentIndent}${char} ${key}: ${funct}`;
 

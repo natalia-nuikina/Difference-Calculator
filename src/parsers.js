@@ -1,8 +1,7 @@
 import path from 'path';
-import fs from 'fs';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import yaml from 'js-yaml';
-import { getFixturePath } from './helpers.js';
+import { readFile } from './helpers.js';
 
 const parseFile = (file) => {
   const format = path.extname(file);
@@ -13,8 +12,7 @@ const parseFile = (file) => {
   } else if (format === '.yml' || format === '.yaml') {
     parse = yaml.load;
   }
-  // console.log(path.resolve(file))
-  return parse(fs.readFileSync(getFixturePath(file)));
+  return parse(readFile(file));
 };
 
 export default parseFile;

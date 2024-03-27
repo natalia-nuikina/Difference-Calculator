@@ -5,4 +5,4 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c81eb14305b98f519de9/test_coverage)](https://codeclimate.com/github/natalia-nuikina/frontend-project-46/test_coverage)
 
 ### Asciinema:
-[![DEMO gendiff](https://asciinema.org/a/kWAe6witFLfkPFq57ow0gK6zv.svg)](https://asciinema.org/a/kWAe6witFLfkPFq57ow0gK6zv)
+[![DEMO gendiff](https://asciinema.org/a/420Bnw3nPnZaNej06l6ofhn5u.svg)](https://asciinema.org/a/420Bnw3nPnZaNej06l6ofhn5u)
