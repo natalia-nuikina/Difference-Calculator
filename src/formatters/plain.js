@@ -1,28 +1,17 @@
 import _ from 'lodash';
+import parseFile from '../parsers.js';
+import { getData } from '../helpers.js';
 
-const getData = (value) => {
-  let result;
-  if (typeof (value) === 'string') {
-    result = `'${value}'`;
-  } else if (typeof (value) === 'object') {
-    if (value === null) {
-      result = value;
-    } else {
-      result = '[complex value]';
-    }
-  } else {
-    result = value;
-  }
-  return result;
-};
+const plain = (filepath1, filepath2, differents) => {
+  const currentFile1 = parseFile(filepath1);
+  const currentFile2 = parseFile(filepath2);
 
-const plain = (file1, file2, differents) => {
   let res = '';
-  const iter = (currentFile1, currentFile2, diff, depth) => {
+  const iter = (file1, file2, diff, depth) => {
     Object.keys(diff)
       .map((key) => {
-        const curValue1 = currentFile1[key];
-        const curValue2 = currentFile2[key];
+        const curValue1 = file1[key];
+        const curValue2 = file2[key];
         let path = key;
         if (_.isObject(diff[key])) {
           const collectionPath = `${depth}${[key]}.`;
@@ -37,10 +26,9 @@ const plain = (file1, file2, differents) => {
         }
         return res;
       });
-    // console.log(res)
     return res;
   };
-  return iter(file1, file2, differents, '').slice(1);
+  return iter(currentFile1, currentFile2, differents, '').slice(1);
 };
 
 export default plain;

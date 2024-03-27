@@ -1,9 +1,7 @@
 import _ from 'lodash';
 import parseFile from './parsers.js';
-import stylish from './formatters/stylish.js';
-import plain from './formatters/plain.js';
 
-const gendiff = (filepath1, filepath2, formatName = stylish) => {
+const gendiff = (filepath1, filepath2) => {
   const currentFile1 = parseFile(filepath1);
   const currentFile2 = parseFile(filepath2);
 
@@ -34,9 +32,7 @@ const gendiff = (filepath1, filepath2, formatName = stylish) => {
     return result;
   };
   const diff = iter(currentFile1, currentFile2);
-  // console.log(diff)
-  const result = formatName(currentFile1, currentFile2, diff);
-  return result;
+  return diff;
 };
 
 export default gendiff;

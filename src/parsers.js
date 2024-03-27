@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import yaml from 'js-yaml';
+import { getFixturePath } from './helpers.js';
 
 const parseFile = (file) => {
   const format = path.extname(file);
@@ -12,7 +13,8 @@ const parseFile = (file) => {
   } else if (format === '.yml' || format === '.yaml') {
     parse = yaml.load;
   }
-  return parse(fs.readFileSync(path.resolve('./__fixtures__', file)));
+  // console.log(path.resolve(file))
+  return parse(fs.readFileSync(getFixturePath(file)));
 };
 
 export default parseFile;
