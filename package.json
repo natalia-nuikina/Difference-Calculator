@@ -16,7 +16,7 @@
     "genDiff": "bin/genDiff.js"
   },
   "type": "module",
-  "main": "genDiff.js",
+  "main": "src/index.js",
   "devDependencies": {
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
