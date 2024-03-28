@@ -1,0 +1,135 @@
+[
+  {
+    "filePath1": "/Users/natal/Hexlet/frontend-project-46/__fixtures__/file3.yml",
+    "filePath2": "/Users/natal/Hexlet/frontend-project-46/__fixtures__/file4.yml",
+    "messages": [
+      {
+        "name": "common",
+        "status": "updatedInside",
+        "value": [
+          {
+            "name": "follow",
+            "status": "added",
+            "value": false
+          },
+          {
+            "name": "setting1",
+            "status": "unchanged",
+            "value": "Value 1"
+          },
+          {
+            "name": "setting2",
+            "status": "removed",
+            "value": 200
+          },
+          {
+            "name": "setting3",
+            "status": "updated",
+            "value": {
+              "before": true,
+              "after": null
+            }
+          },
+          {
+            "name": "setting4",
+            "status": "added",
+            "value": "blah blah"
+          },
+          {
+            "name": "setting5",
+            "status": "added",
+            "value": {
+              "key5": "value5"
+            }
+          },
+          {
+            "name": "setting6",
+            "status": "updatedInside",
+            "value": [
+              {
+                "name": "doge",
+                "status": "updatedInside",
+                "value": [
+                  {
+                    "name": "wow",
+                    "status": "updated",
+                    "value": {
+                      "before": "",
+                      "after": "so much"
+                    }
+                  }
+                ]
+              },
+              {
+                "name": "key",
+                "status": "unchanged",
+                "value": "value"
+              },
+              {
+                "name": "ops",
+                "status": "added",
+                "value": "vops"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "group1",
+        "status": "updatedInside",
+        "value": [
+          {
+            "name": "baz",
+            "status": "updated",
+            "value": {
+              "before": "bas",
+              "after": "bars"
+            }
+          },
+          {
+            "name": "foo",
+            "status": "unchanged",
+            "value": "bar"
+          },
+          {
+            "name": "nest",
+            "status": "updated",
+            "value": {
+              "before": {
+                "key": "value"
+              },
+              "after": "str"
+            }
+          }
+        ]
+      },
+      {
+        "name": "group2",
+        "status": "removed",
+        "value": {
+          "abc": 12345,
+          "deep": {
+            "id": 45
+          }
+        }
+      },
+      {
+        "name": "group3",
+        "status": "added",
+        "value": {
+          "deep": {
+            "id": {
+              "number": 45
+            }
+          },
+          "fee": 100500
+        }
+      }
+    ],
+    "addedCount": 5,
+    "removedCount": 2,
+    "unchangedCount": 3,
+    "updatedCount": 4,
+    "updatedInsideCount": 4
+  }
+]
