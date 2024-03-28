@@ -10,7 +10,7 @@ const chooseFormater = (filePath1, filePath2, diff, formatName) => {
       return json(filePath1, filePath2, diff);
     case 'stylish':
       return stylish(filePath1, filePath2, diff);
-    case '':
+    case 'undefined':
       return stylish(filePath1, filePath2, diff);
     default:
       throw new Error(`Unknown order state: '${formatName}'!`);
