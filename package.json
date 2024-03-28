@@ -13,7 +13,7 @@
     "lodash": "^4.17.21"
   },
   "bin": {
-    "gendiff": "bin/genDiff.js"
+    "gendiff": "bin/gendiff.js"
   },
   "type": "module",
   "main": "src/index.js",
