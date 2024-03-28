@@ -14,19 +14,14 @@ export const readContent = (filePath) => fs.readFileSync(resolve(process.cwd(), 
 export const getLine = (currentIndent, key, char, value) => `\n${currentIndent}${char} ${key}: ${value}`;
 
 export const getData = (value) => {
-  let result;
-  if (typeof (value) === 'string') {
-    result = `'${value}'`;
-  } else if (typeof (value) === 'object') {
-    if (value === null) {
-      result = value;
-    } else {
-      result = '[complex value]';
-    }
-  } else {
-    result = value;
+  switch (typeof (value)) {
+    case 'string':
+      return `'${value}'`;
+    case 'object':
+      return (value === null) ? value : '[complex value]';
+    default:
+      return value;
   }
-  return result;
 };
 
 export const objectToString = (obj, depth) => {

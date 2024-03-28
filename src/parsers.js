@@ -5,14 +5,16 @@ import { readContent } from './helpers.js';
 
 const parseContent = (filePath) => {
   const format = path.extname(filePath);
-
-  let parse;
-  if (format === '' || format === '.json') {
-    parse = JSON.parse;
-  } else if (format === '.yml' || format === '.yaml') {
-    parse = yaml.load;
+  switch (format) {
+    case '.json':
+      return JSON.parse(readContent(filePath));
+    case '.yaml':
+      return yaml.load(readContent(filePath));
+    case '.yml':
+      return yaml.load(readContent(filePath));
+    default:
+      return JSON.parse(readContent(filePath));
   }
-  return parse(readContent(filePath));
 };
 
 export default parseContent;
