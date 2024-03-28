@@ -1,5 +1,5 @@
 import fs from 'fs';
-import genDiff from '../src/index.js';
+import genDiff from '../src/gendiff.js';
 import chooseFormater from '../src/formatters/index.js';
 import { getFixturePath } from '../src/helpers.js';
 

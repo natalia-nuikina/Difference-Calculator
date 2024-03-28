@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 import { program } from 'commander';
-import genDiff from '../src/index.js';
-import chooseFormater from '../src/formatters/index.js';
+import start from '../src/index.js';
 
 program
   .name('gendiff')
@@ -12,9 +11,7 @@ program
   .option('-f, --format [type]', 'output format (default: "stylish")', 'stylish')
   .action((filePath1, filePath2) => {
     const formatName = program.opts().format;
-    const diff = genDiff(filePath1, filePath2);
-    const result = chooseFormater(filePath1, filePath2, diff, formatName);
-    console.log(result);
+    console.log(start(filePath1, filePath2, formatName));
   });
 
 program.parse();
