@@ -1,7 +1,7 @@
 [
   {
-    "file1": "file3.yml",
-    "file2": "file4.yml",
+    "fileName1": "file3.yml",
+    "fileName2": "file4.yml",
     "messages": [
       {
         "name": "common",

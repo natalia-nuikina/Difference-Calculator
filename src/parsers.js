@@ -1,10 +1,10 @@
 import path from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import yaml from 'js-yaml';
-import { readFile } from './helpers.js';
+import { readContent } from './helpers.js';
 
-const parseFile = (file) => {
-  const format = path.extname(file);
+const parseContent = (filePath) => {
+  const format = path.extname(filePath);
 
   let parse;
   if (format === '' || format === '.json') {
@@ -12,7 +12,7 @@ const parseFile = (file) => {
   } else if (format === '.yml' || format === '.yaml') {
     parse = yaml.load;
   }
-  return parse(readFile(file));
+  return parse(readContent(filePath));
 };
 
-export default parseFile;
+export default parseContent;

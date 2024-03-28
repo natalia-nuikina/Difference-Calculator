@@ -1,14 +1,14 @@
 import _ from 'lodash';
 import path from 'path';
-import parseFile from '../parsers.js';
+import parseContent from '../parsers.js';
 
-const json = (filepath1, filepath2, differents) => {
+const json = (filePath1, filePath2, differents) => {
   const result = {};
-  result.file1 = path.basename(filepath1);
-  result.file2 = path.basename(filepath2);
+  result.fileName1 = path.basename(filePath1);
+  result.fileName2 = path.basename(filePath2);
 
-  const currentFile1 = parseFile(filepath1);
-  const currentFile2 = parseFile(filepath2);
+  const currentContent1 = parseContent(filePath1);
+  const currentContent2 = parseContent(filePath2);
 
   let addedCount = 0;
   let removedCount = 0;
@@ -16,39 +16,48 @@ const json = (filepath1, filepath2, differents) => {
   let updatedCount = 0;
   let updatedInsideCount = 0;
 
-  const iter = (file1, file2, diff, depth) => {
+  const iter = (content1, content2, diff) => {
     const a = Object.keys(diff)
       .map((key) => {
         const message = {};
-        const curValue1 = file1[key];
-        const curValue2 = file2[key];
+        const curValue1 = content1[key];
+        const curValue2 = content2[key];
 
         message.name = key;
         message.status = (typeof diff[key] === 'string') ? diff[key] : 'updatedInside';
-        if (diff[key] === 'removed') {
-          removedCount += 1;
-          message.value = file1[key];
-        } else if (diff[key] === 'added') {
-          addedCount += 1;
-          message.value = file2[key];
-        } else if (diff[key] === 'unchanged') {
-          unchangedCount += 1;
-          message.value = file1[key];
-        } else if (diff[key] === 'updated') {
-          updatedCount += 1;
-          message.value = {};
-          message.value.before = file1[key];
-          message.value.after = file2[key];
-        } else if (_.isObject(diff[key])) {
-          updatedInsideCount += 1;
-          message.value = iter(curValue1, curValue2, diff[key], depth + 1);
+        switch (diff[key]) {
+          case 'removed':
+            removedCount += 1;
+            message.value = content1[key];
+            break;
+          case 'added':
+            addedCount += 1;
+            message.value = content2[key];
+            break;
+          case 'unchanged':
+            unchangedCount += 1;
+            message.value = content1[key];
+            break;
+          case 'updated':
+            updatedCount += 1;
+            message.value = {};
+            message.value.before = content1[key];
+            message.value.after = content2[key];
+            break;
+          default:
+            if (_.isObject(diff[key])) {
+              updatedInsideCount += 1;
+              message.value = iter(curValue1, curValue2, diff[key]);
+            } else {
+              throw new Error(`Unknown order state: '${diff[key]}'!`);
+            }
         }
         return message;
       });
     return a;
   };
 
-  result.messages = iter(currentFile1, currentFile2, differents, 1);
+  result.messages = iter(currentContent1, currentContent2, differents);
   result.addedCount = addedCount;
   result.removedCount = removedCount;
   result.unchangedCount = unchangedCount;

@@ -1,7 +1,7 @@
 [
   {
-    "file1": "file3.json",
-    "file2": "file4.json",
+    "fileName1": "file3.json",
+    "fileName2": "file4.json",
     "messages": [
       {
         "name": "common",

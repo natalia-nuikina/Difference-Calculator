@@ -1,23 +1,23 @@
 import _ from 'lodash';
-import parseFile from './parsers.js';
+import parseContent from './parsers.js';
 
-const genDiff = (filepath1, filepath2) => {
-  const currentFile1 = parseFile(filepath1);
-  const currentFile2 = parseFile(filepath2);
+const genDiff = (filePath1, filePath2) => {
+  const currentContent1 = parseContent(filePath1);
+  const currentContent2 = parseContent(filePath2);
 
-  const iter = (file1, file2) => {
-    const keys = _.union(Object.keys(file1), Object.keys(file2));
+  const iter = (content1, content2) => {
+    const keys = _.union(Object.keys(content1), Object.keys(content2));
     const sortedKeys = keys.sort((a, b) => a.localeCompare(b));
     const result = {};
     sortedKeys.map((key) => {
-      const currentValue1 = file1[key];
-      const currentValue2 = file2[key];
+      const currentValue1 = content1[key];
+      const currentValue2 = content2[key];
 
-      if (Object.hasOwn(file1, key) && !Object.hasOwn(file2, key)) {
+      if (Object.hasOwn(content1, key) && !Object.hasOwn(content2, key)) {
         result[key] = 'removed';
-      } else if (!Object.hasOwn(file1, key) && Object.hasOwn(file2, key)) {
+      } else if (!Object.hasOwn(content1, key) && Object.hasOwn(content2, key)) {
         result[key] = 'added';
-      } else if (Object.hasOwn(file1, key) && Object.hasOwn(file2, key)) {
+      } else if (Object.hasOwn(content1, key) && Object.hasOwn(content2, key)) {
         if (_.isObject(currentValue1) && _.isObject(currentValue2)) {
           const res = iter(currentValue1, currentValue2);
           result[key] = res;
@@ -31,7 +31,7 @@ const genDiff = (filepath1, filepath2) => {
     });
     return result;
   };
-  const diff = iter(currentFile1, currentFile2);
+  const diff = iter(currentContent1, currentContent2);
   return diff;
 };
 

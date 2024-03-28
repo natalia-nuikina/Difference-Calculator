@@ -10,10 +10,10 @@ program
   .description('Compares two configuration files and shows a difference.')
   .arguments('<filepath1> <filepath2>')
   .option('-f, --format [type]', 'output format (default: "stylish")', 'stylish')
-  .action((file1, file2) => {
+  .action((filePath1, filePath2) => {
     const formatName = program.opts().format;
-    const diff = genDiff(file1, file2);
-    const result = chooseFormater(file1, file2, diff, formatName);
+    const diff = genDiff(filePath1, filePath2);
+    const result = chooseFormater(filePath1, filePath2, diff, formatName);
     console.log(result);
   });
 
