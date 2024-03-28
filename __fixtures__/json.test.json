@@ -1,7 +1,7 @@
 [
   {
-    "filePath1": "/Users/natal/Hexlet/frontend-project-46/__fixtures__/file3.json",
-    "filePath6": "/Users/natal/Hexlet/frontend-project-46/__fixtures__/file4.json",
+    "file1": "file3.json",
+    "file2": "file4.json",
     "messages": [
       {
         "name": "common",

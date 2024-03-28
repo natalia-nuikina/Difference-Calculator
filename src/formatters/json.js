@@ -1,10 +1,11 @@
 import _ from 'lodash';
+import path from 'path';
 import parseFile from '../parsers.js';
 
 const json = (filepath1, filepath2, differents) => {
   const result = {};
-  result.filePath1 = filepath1;
-  result.filePath2 = filepath2;
+  result.file1 = path.basename(filepath1);
+  result.file2 = path.basename(filepath2);
 
   const currentFile1 = parseFile(filepath1);
   const currentFile2 = parseFile(filepath2);
