@@ -1,7 +1,7 @@
 install: 
 				npm ci
 
-genDiff:
+gendiff:
 				node bin/genDiff.js
 
 publish:
