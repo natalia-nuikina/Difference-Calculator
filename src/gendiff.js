@@ -32,7 +32,7 @@ const genDiff = (filePath1, filePath2) => {
     return result;
   };
   const diff = iter(currentContent1, currentContent2);
-console.log(diff)
+// console.log(diff)
   return diff;
 };
 
