@@ -28,8 +28,8 @@ export const objectToString = (obj, depth) => {
   if (!_.isObject(obj)) {
     return obj;
   }
-  const keys = Object.keys(obj);
-  const sortedKeys = keys.sort((a, b) => a.localeCompare(b));
+  const sortedKeys = _.sortedUniq(Object.keys(obj));
+  // const sortedKeys = keys.sort((a, b) => a.localeCompare(b));
   const tab = '  ';
   let result = '{\n';
   const lines = sortedKeys.map((item) => {
