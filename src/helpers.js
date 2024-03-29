@@ -34,7 +34,6 @@ export const getString = (value, depth) => {
     }
     const keys = Object.keys(obj);
     const sortedKeys = keys.toSorted();
-    // ;
     const lines = sortedKeys.map((item) => {
       const currentValue = obj[item];
       return `${indent}${item}: ${getString(currentValue, depthIter + 1)}`;

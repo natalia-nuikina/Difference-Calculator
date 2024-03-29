@@ -4,7 +4,7 @@ import {
   getName, getChildren, getType,
 } from '../helpers.js';
 
-const json = (differents) => {
+const json = (difference) => {
   const iter = (diff) => {
     if (_.isObject(diff)) {
       return diff;
@@ -17,7 +17,7 @@ const json = (differents) => {
       });
     return lines;
   };
-  return JSON.stringify(iter(differents), null, '  ');
+  return JSON.stringify(iter(difference), null, '  ');
 };
 
 export default json;

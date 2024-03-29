@@ -2,7 +2,7 @@ import {
   getLine, getString, getName, getChildren, getType, getValueBefore, getValueAfter,
 } from '../helpers.js';
 
-const stylish = (differents, replacer = '  ', spacesCount = 2) => {
+const stylish = (difference, replacer = '  ', spacesCount = 2) => {
   const iter = (diff, depth) => {
     const leftShiftLine = 1;
     const leftShiftBracket = 2;
@@ -35,7 +35,7 @@ const stylish = (differents, replacer = '  ', spacesCount = 2) => {
       `${bracketIndent}}`,
     ].join('\n');
   };
-  return iter(differents, 1);
+  return iter(difference, 1);
 };
 
 export default stylish;

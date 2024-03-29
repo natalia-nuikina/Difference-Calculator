@@ -2,8 +2,7 @@ import {
   getData, getName, getChildren, getValueBefore, getValueAfter, getType,
 } from '../helpers.js';
 
-const plain = (differents) => {
-  // console.log(differents)
+const plain = (difference) => {
   const iter = (diff, depth) => {
     const lines = diff
       .flatMap((item) => {
@@ -21,11 +20,10 @@ const plain = (differents) => {
           default:
             throw new Error(`Unknown order state: '${getType(item)}'!`);
         }
-        // }
       });
     return lines.join('\n');
   };
-  return iter(differents, '');
+  return iter(difference, '');
 };
 
 export default plain;
