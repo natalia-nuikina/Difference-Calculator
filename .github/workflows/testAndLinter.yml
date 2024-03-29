@@ -7,7 +7,9 @@ jobs:
       # Клонируем репозиторий
       - uses: actions/checkout@v4
       # Устанавливаем Node.js
-      - uses: actions/setup-node@v4
+      - run:
+        using: 'node20'
+        main: src/index.js
       # Ставим зависимости
       - run: npm install
       # Запускаем линтер
