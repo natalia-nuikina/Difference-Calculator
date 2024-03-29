@@ -5,9 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Клонируем репозиторий
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       # Устанавливаем Node.js
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
       # Ставим зависимости
       - run: npm install
       # Запускаем линтер
