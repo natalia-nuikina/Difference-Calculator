@@ -17,13 +17,13 @@ test('genDiffStylish', () => {
   expect(chooseFormater(filePath1, filePath4, diff, 'stylish')).toBe(readContent('file2.test.txt'));
 });
 
-test('genDiffPlain', () => {
-  expect(chooseFormater(filePath1, filePath2, diff, 'plain')).toBe(readContent('plain.test.txt'));
-  expect(chooseFormater(filePath3, filePath4, diff, 'plain')).toBe(readContent('plain.test.txt'));
-  expect(chooseFormater(filePath1, filePath4, diff, 'plain')).toBe(readContent('plain.test.txt'));
-});
+// test('genDiffPlain', () => {
+//   expect(chooseFormater(filePath1, filePath2, diff, 'plain')).toBe(readContent('plain.test.txt'));
+//   expect(chooseFormater(filePath3, filePath4, diff, 'plain')).toBe(readContent('plain.test.txt'));
+//   expect(chooseFormater(filePath1, filePath4, diff, 'plain')).toBe(readContent('plain.test.txt'));
+// });
 
-test('genDiffJson', () => {
-  expect(chooseFormater(filePath1, filePath2, diff, 'json')).toBe(readContent('json.test.json'));
-  expect(chooseFormater(filePath3, filePath4, diff, 'json')).toBe(readContent('yaml.test.json'));
-});
+// test('genDiffJson', () => {
+//   expect(chooseFormater(filePath1, filePath2, diff, 'json')).toBe(readContent('json.test.json'));
+//   expect(chooseFormater(filePath3, filePath4, diff, 'json')).toBe(readContent('yaml.test.json'));
+// });

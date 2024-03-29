@@ -1,51 +1,47 @@
 import _ from 'lodash';
-import parseContent from '../parsers.js';
-import { getLine, objectToString } from '../helpers.js';
+import { getLine, getString } from '../helpers.js';
 
-const stylish = (filePath1, filePath2, differents, replacer = '  ', spacesCount = 2) => {
-  const currentContent1 = parseContent(filePath1);
-  const currentContent2 = parseContent(filePath2);
+const getName = (obj) => obj.name;
+const getChildren = (obj) => _.cloneDeep(obj.children);
+const getType = (obj) => obj.type;
+const getValueBefore = (obj) => obj.children.before;
+const getValueAfter = (obj) => obj.children.after;
 
-  const iter = (content1, content2, diff, depth) => {
-    let res = '{';
+const stylish = (differents, replacer = '  ', spacesCount = 2) => {
+  const iter = (diff, depth) => {
     const leftShiftLine = 1;
     const leftShiftBracket = 2;
     const indent = replacer.repeat(depth * spacesCount - leftShiftLine);
     const bracketIndent = replacer.repeat(depth * spacesCount - leftShiftBracket);
-    Object.keys(diff)
+    // console.log(diff)
+    const lines = diff
       .map((key) => {
         const charMinus = '-';
         const charPlus = '+';
         const charNull = ' ';
-        const value1 = content1[key];
-        const value2 = content2[key];
-        switch (diff[key]) {
+        const children = getChildren(key);
+        switch (getType(key)) {
           case 'removed':
-            res += getLine(indent, key, charMinus, objectToString(value1, depth));
-            break;
+            return getLine(indent, getName(key), charMinus, getString(children, depth));
           case 'added':
-            res += getLine(indent, key, charPlus, objectToString(value2, depth));
-            break;
+            return getLine(indent, getName(key), charPlus, getString(children, depth));
           case 'unchanged':
-            res += getLine(indent, key, charNull, objectToString(value1, depth));
-            break;
+            return getLine(indent, getName(key), charNull, getString(children, depth));
           case 'updated':
-            res += getLine(indent, key, charMinus, objectToString(value1, depth));
-            res += getLine(indent, key, charPlus, objectToString(value2, depth));
-            break;
+            return `${getLine(indent, getName(key), charMinus, getString(getValueBefore(key), depth))}\n${getLine(indent, getName(key), charPlus, getString(getValueAfter(key)))}`;
+          case 'updatedInside':
+            return getLine(indent, getName(key), charNull, iter(getChildren(key), depth + 1));
           default:
-            if (_.isObject(diff[key])) {
-              res += getLine(indent, key, charNull, iter(value1, value2, diff[key], depth + 1));
-            } else {
-              throw new Error(`Unknown order state: '${diff[key]}'!`);
-            }
+            throw new Error(`Unknown order state: '${diff[key]}'!`);
         }
-        return key;
       });
-    res += `\n${bracketIndent}}`;
-    return res;
+    return [
+      '{',
+      ...lines,
+      `${bracketIndent}}`,
+    ].join('\n');
   };
-  return iter(currentContent1, currentContent2, differents, 1);
+  return iter(differents, 1);
 };
 
 export default stylish;

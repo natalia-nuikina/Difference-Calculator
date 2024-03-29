@@ -9,7 +9,7 @@ const chooseFormater = (filePath1, filePath2, diff, formatName) => {
     case 'json':
       return json(filePath1, filePath2, diff);
     default:
-      return stylish(filePath1, filePath2, diff);
+      return stylish(diff);
   }
 };
 

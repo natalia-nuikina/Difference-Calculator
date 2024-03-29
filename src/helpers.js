@@ -11,7 +11,7 @@ export const getFixturePath = (fileName) => {
 
 export const readContent = (filePath) => fs.readFileSync(resolve(process.cwd(), filePath));
 
-export const getLine = (currentIndent, key, char, value) => `\n${currentIndent}${char} ${key}: ${value}`;
+export const getLine = (currentIndent, key, char, value) => `${currentIndent}${char} ${key}: ${value}`;
 
 export const getData = (value) => {
   switch (typeof (value)) {
@@ -24,19 +24,26 @@ export const getData = (value) => {
   }
 };
 
-export const objectToString = (obj, depth) => {
-  if (!_.isObject(obj)) {
-    return obj;
-  }
-  const sortedKeys = _.sortedUniq(Object.keys(obj));
-  // const sortedKeys = keys.sort((a, b) => a.localeCompare(b));
-  const tab = '  ';
-  let result = '{\n';
-  const lines = sortedKeys.map((item) => {
-    const currentValue = obj[item];
-    return `${tab.repeat(depth * 2 + 2)}${item}: ${objectToString(currentValue, depth + 1)}`;
-  });
-  result += lines.join('\n');
-  result += `\n${tab.repeat(depth * 2)}}`;
-  return result;
+export const getString = (value, depth) => {
+  const iter = (obj, depthIter) => {
+    const tab = '  ';
+    const indent = tab.repeat(depthIter * 2 + 2);
+    const bracketIndent = tab.repeat(depthIter * 2);
+    if (!_.isObject(obj)) {
+      return obj;
+    }
+    const keys = Object.keys(obj);
+    const sortedKeys = keys.toSorted();
+    // ;
+    const lines = sortedKeys.map((item) => {
+      const currentValue = obj[item];
+      return `${indent}${item}: ${getString(currentValue, depthIter + 1)}`;
+    });
+    return [
+      '{',
+      ...lines,
+      `${bracketIndent}}`,
+    ].join('\n');
+  };
+  return iter(value, depth);
 };
