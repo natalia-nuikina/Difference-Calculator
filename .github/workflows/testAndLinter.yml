@@ -8,8 +8,7 @@ jobs:
       - uses: actions/checkout@v4
       # Устанавливаем Node.js
       - run:
-        using: 'node20'
-        main: src/index.js
+      - uses: 'node20'
       # Ставим зависимости
       - run: npm install
       # Запускаем линтер
