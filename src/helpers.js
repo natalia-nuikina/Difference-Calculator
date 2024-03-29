@@ -47,3 +47,9 @@ export const getString = (value, depth) => {
   };
   return iter(value, depth);
 };
+
+export const getName = (obj) => obj.name;
+export const getChildren = (obj) => obj.children;
+export const getType = (obj) => obj.type;
+export const getValueBefore = (obj) => obj.children.before;
+export const getValueAfter = (obj) => obj.children.after;

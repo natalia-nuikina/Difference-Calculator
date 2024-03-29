@@ -5,9 +5,9 @@ import json from './json.js';
 const chooseFormater = (filePath1, filePath2, diff, formatName) => {
   switch (formatName) {
     case 'plain':
-      return plain(filePath1, filePath2, diff);
+      return plain(diff);
     case 'json':
-      return json(filePath1, filePath2, diff);
+      return json(diff);
     default:
       return stylish(diff);
   }

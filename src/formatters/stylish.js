@@ -1,11 +1,6 @@
-import _ from 'lodash';
-import { getLine, getString } from '../helpers.js';
-
-const getName = (obj) => obj.name;
-const getChildren = (obj) => _.cloneDeep(obj.children);
-const getType = (obj) => obj.type;
-const getValueBefore = (obj) => obj.children.before;
-const getValueAfter = (obj) => obj.children.after;
+import {
+  getLine, getString, getName, getChildren, getType, getValueBefore, getValueAfter,
+} from '../helpers.js';
 
 const stylish = (differents, replacer = '  ', spacesCount = 2) => {
   const iter = (diff, depth) => {
@@ -13,26 +8,25 @@ const stylish = (differents, replacer = '  ', spacesCount = 2) => {
     const leftShiftBracket = 2;
     const indent = replacer.repeat(depth * spacesCount - leftShiftLine);
     const bracketIndent = replacer.repeat(depth * spacesCount - leftShiftBracket);
-    // console.log(diff)
     const lines = diff
-      .map((key) => {
+      .map((item) => {
         const charMinus = '-';
         const charPlus = '+';
         const charNull = ' ';
-        const children = getChildren(key);
-        switch (getType(key)) {
+        const children = getChildren(item);
+        switch (getType(item)) {
           case 'removed':
-            return getLine(indent, getName(key), charMinus, getString(children, depth));
+            return getLine(indent, getName(item), charMinus, getString(children, depth));
           case 'added':
-            return getLine(indent, getName(key), charPlus, getString(children, depth));
+            return getLine(indent, getName(item), charPlus, getString(children, depth));
           case 'unchanged':
-            return getLine(indent, getName(key), charNull, getString(children, depth));
+            return getLine(indent, getName(item), charNull, getString(children, depth));
           case 'updated':
-            return `${getLine(indent, getName(key), charMinus, getString(getValueBefore(key), depth))}\n${getLine(indent, getName(key), charPlus, getString(getValueAfter(key)))}`;
+            return `${getLine(indent, getName(item), charMinus, getString(getValueBefore(item), depth))}\n${getLine(indent, getName(item), charPlus, getString(getValueAfter(item)))}`;
           case 'updatedInside':
-            return getLine(indent, getName(key), charNull, iter(getChildren(key), depth + 1));
+            return getLine(indent, getName(item), charNull, iter(getChildren(item), depth + 1));
           default:
-            throw new Error(`Unknown order state: '${diff[key]}'!`);
+            throw new Error(`Unknown order state: '${getType(item)}'!`);
         }
       });
     return [

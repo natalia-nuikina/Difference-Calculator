@@ -1,43 +1,31 @@
-import _ from 'lodash';
-import parseContent from '../parsers.js';
-import { getData } from '../helpers.js';
+import {
+  getData, getName, getChildren, getValueBefore, getValueAfter, getType,
+} from '../helpers.js';
 
-const plain = (filePath1, filePath2, differents) => {
-  const currentContent1 = parseContent(filePath1);
-  const currentContent2 = parseContent(filePath2);
-
-  let res = '';
-  const iter = (content1, content2, diff, depth) => {
-    Object.keys(diff)
-      .map((key) => {
-        const curValue1 = content1[key];
-        const curValue2 = content2[key];
-        let path = key;
-        if (_.isObject(diff[key])) {
-          const collectionPath = `${depth}${[key]}.`;
-          path = iter(curValue1, curValue2, diff[key], collectionPath);
-        } else {
-          switch (diff[key]) {
-            case 'removed':
-              res += `\nProperty '${depth}${path}' was ${diff[key]}`;
-              break;
-            case 'added':
-              res += `\nProperty '${depth}${path}' was ${diff[key]} with value: ${getData(curValue2)}`;
-              break;
-            case 'updated':
-              res += `\nProperty '${depth}${path}' was ${diff[key]}. From ${getData(curValue1)} to ${getData(curValue2)}`;
-              break;
-            case 'unchanged':
-              break;
-            default:
-              throw new Error(`Unknown order state: '${diff[key]}'!`);
-          }
+const plain = (differents) => {
+  // console.log(differents)
+  const iter = (diff, depth) => {
+    const lines = diff
+      .flatMap((item) => {
+        switch (getType(item)) {
+          case 'removed':
+            return `Property '${depth}${getName(item)}' was ${getType(item)}`;
+          case 'added':
+            return `Property '${depth}${getName(item)}' was ${getType(item)} with value: ${getData(getChildren(item))}`;
+          case 'updated':
+            return `Property '${depth}${getName(item)}' was ${getType(item)}. From ${getData(getValueBefore(item))} to ${getData(getValueAfter(item))}`;
+          case 'unchanged':
+            return [];
+          case 'updatedInside':
+            return iter(getChildren(item), `${depth}${getName(item)}.`);
+          default:
+            throw new Error(`Unknown order state: '${getType(item)}'!`);
         }
-        return res;
+        // }
       });
-    return res;
+    return lines.join('\n');
   };
-  return iter(currentContent1, currentContent2, differents, '').slice(1);
+  return iter(differents, '');
 };
 
 export default plain;

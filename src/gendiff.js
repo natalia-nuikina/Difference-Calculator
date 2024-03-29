@@ -23,7 +23,6 @@ const genDiff = (filePath1, filePath2) => {
         } else if (currentValue1 === currentValue2) {
           assignment(result, { name: key, type: 'unchanged', children: currentValue1 });
         } else if (currentValue1 !== currentValue2) {
-          assignment(result, { [key]: 'updated' });
           assignment(result, { name: key, type: 'updated', children: { before: currentValue1, after: currentValue2 } });
         }
       }
