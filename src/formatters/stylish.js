@@ -22,7 +22,7 @@ const stylish = (differents, replacer = '  ', spacesCount = 2) => {
           case 'unchanged':
             return getLine(indent, getName(item), charNull, getString(children, depth));
           case 'updated':
-            return `${getLine(indent, getName(item), charMinus, getString(getValueBefore(item), depth))}\n${getLine(indent, getName(item), charPlus, getString(getValueAfter(item)))}`;
+            return `${getLine(indent, getName(item), charMinus, getString(getValueBefore(item), depth))}\n${getLine(indent, getName(item), charPlus, getString(getValueAfter(item), depth))}`;
           case 'updatedInside':
             return getLine(indent, getName(item), charNull, iter(getChildren(item), depth + 1));
           default:
