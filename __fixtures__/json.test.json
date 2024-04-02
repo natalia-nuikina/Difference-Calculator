@@ -6,35 +6,35 @@
       {
         "name": "follow",
         "type": "added",
-        "children": false
+        "value": false
       },
       {
         "name": "setting1",
         "type": "unchanged",
-        "children": "Value 1"
+        "value": "Value 1"
       },
       {
         "name": "setting2",
         "type": "removed",
-        "children": 200
+        "value": 200
       },
       {
         "name": "setting3",
         "type": "updated",
-        "children": {
-          "before": true,
-          "after": null
+        "value": {
+          "file1": true,
+          "file2": null
         }
       },
       {
         "name": "setting4",
         "type": "added",
-        "children": "blah blah"
+        "value": "blah blah"
       },
       {
         "name": "setting5",
         "type": "added",
-        "children": {
+        "value": {
           "key5": "value5"
         }
       },
@@ -49,9 +49,9 @@
               {
                 "name": "wow",
                 "type": "updated",
-                "children": {
-                  "before": "",
-                  "after": "so much"
+                "value": {
+                  "file1": "",
+                  "file2": "so much"
                 }
               }
             ]
@@ -59,12 +59,12 @@
           {
             "name": "key",
             "type": "unchanged",
-            "children": "value"
+            "value": "value"
           },
           {
             "name": "ops",
             "type": "added",
-            "children": "vops"
+            "value": "vops"
           }
         ]
       }
@@ -77,24 +77,24 @@
       {
         "name": "baz",
         "type": "updated",
-        "children": {
-          "before": "bas",
-          "after": "bars"
+        "value": {
+          "file1": "bas",
+          "file2": "bars"
         }
       },
       {
         "name": "foo",
         "type": "unchanged",
-        "children": "bar"
+        "value": "bar"
       },
       {
         "name": "nest",
         "type": "updated",
-        "children": {
-          "before": {
+        "value": {
+          "file1": {
             "key": "value"
           },
-          "after": "str"
+          "file2": "str"
         }
       }
     ]
@@ -102,7 +102,7 @@
   {
     "name": "group2",
     "type": "removed",
-    "children": {
+    "value": {
       "abc": 12345,
       "deep": {
         "id": 45
@@ -112,7 +112,7 @@
   {
     "name": "group3",
     "type": "added",
-    "children": {
+    "value": {
       "deep": {
         "id": {
           "number": 45

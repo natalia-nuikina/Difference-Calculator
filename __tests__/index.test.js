@@ -2,6 +2,7 @@ import fs from 'fs';
 import genDiff from '../src/gendiff.js';
 import chooseFormater from '../src/formatters/index.js';
 import { getFixturePath } from '../src/helpers.js';
+import parseContent from '../src/parsers.js';
 
 const readContent = (fileName) => fs.readFileSync(getFixturePath(fileName), 'utf-8');
 
@@ -9,7 +10,9 @@ const filePath1 = getFixturePath('file3.json');
 const filePath2 = getFixturePath('file4.json');
 const filePath3 = getFixturePath('file3.yml');
 const filePath4 = getFixturePath('file4.yml');
-const diff = genDiff(getFixturePath('file3.json'), getFixturePath('file4.json'));
+const currentContent1 = parseContent(filePath1);
+const currentContent2 = parseContent(filePath2);
+const diff = genDiff(currentContent1, currentContent2);
 
 describe('genDiff', () => {
   test.each([

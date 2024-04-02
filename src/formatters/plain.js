@@ -1,5 +1,5 @@
 import {
-  getData, getName, getChildren, getValueBefore, getValueAfter, getType,
+  getData, getName, getChildren, getValueFile1, getValueFile2, getType, getValue,
 } from '../helpers.js';
 
 const plain = (difference) => {
@@ -10,9 +10,9 @@ const plain = (difference) => {
           case 'removed':
             return `Property '${depth}${getName(item)}' was ${getType(item)}`;
           case 'added':
-            return `Property '${depth}${getName(item)}' was ${getType(item)} with value: ${getData(getChildren(item))}`;
+            return `Property '${depth}${getName(item)}' was ${getType(item)} with value: ${getData(getValue(item))}`;
           case 'updated':
-            return `Property '${depth}${getName(item)}' was ${getType(item)}. From ${getData(getValueBefore(item))} to ${getData(getValueAfter(item))}`;
+            return `Property '${depth}${getName(item)}' was ${getType(item)}. From ${getData(getValueFile1(item))} to ${getData(getValueFile2(item))}`;
           case 'unchanged':
             return [];
           case 'updatedInside':

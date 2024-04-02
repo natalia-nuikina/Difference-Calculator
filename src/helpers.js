@@ -49,6 +49,7 @@ export const getString = (value, depth) => {
 
 export const getName = (obj) => obj.name;
 export const getChildren = (obj) => obj.children;
+export const getValue = (obj) => obj.value;
 export const getType = (obj) => obj.type;
-export const getValueBefore = (obj) => obj.children.before;
-export const getValueAfter = (obj) => obj.children.after;
+export const getValueFile1 = (obj) => obj.value.file1;
+export const getValueFile2 = (obj) => obj.value.file2;

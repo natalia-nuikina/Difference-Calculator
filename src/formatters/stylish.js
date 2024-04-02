@@ -1,5 +1,5 @@
 import {
-  getLine, getString, getName, getChildren, getType, getValueBefore, getValueAfter,
+  getLine, getString, getName, getChildren, getType, getValueFile1, getValueFile2, getValue,
 } from '../helpers.js';
 
 const stylish = (difference, replacer = '  ', spacesCount = 2) => {
@@ -13,16 +13,17 @@ const stylish = (difference, replacer = '  ', spacesCount = 2) => {
         const charMinus = '-';
         const charPlus = '+';
         const charNull = ' ';
-        const children = getChildren(item);
+        // const children = getChildren(item);
+        const value = getValue(item);
         switch (getType(item)) {
           case 'removed':
-            return getLine(indent, getName(item), charMinus, getString(children, depth));
+            return getLine(indent, getName(item), charMinus, getString(value, depth));
           case 'added':
-            return getLine(indent, getName(item), charPlus, getString(children, depth));
+            return getLine(indent, getName(item), charPlus, getString(value, depth));
           case 'unchanged':
-            return getLine(indent, getName(item), charNull, getString(children, depth));
+            return getLine(indent, getName(item), charNull, getString(value, depth));
           case 'updated':
-            return `${getLine(indent, getName(item), charMinus, getString(getValueBefore(item), depth))}\n${getLine(indent, getName(item), charPlus, getString(getValueAfter(item), depth))}`;
+            return `${getLine(indent, getName(item), charMinus, getString(getValueFile1(item), depth))}\n${getLine(indent, getName(item), charPlus, getString(getValueFile2(item), depth))}`;
           case 'updatedInside':
             return getLine(indent, getName(item), charNull, iter(getChildren(item), depth + 1));
           default:
