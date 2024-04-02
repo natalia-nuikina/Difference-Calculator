@@ -10,4 +10,4 @@ export const getFixturePath = (fileName) => {
 
 export const readContent = (filePath) => fs.readFileSync(resolve(process.cwd(), filePath));
 
-export const getLine = (currentIndent, key, char, value) => `${currentIndent}${char} ${key}: ${value}`;
+export const getLine = (currentIndent, key, char, value) => `  ${currentIndent}${char} ${key}: ${value}`;

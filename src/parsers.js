@@ -1,17 +1,15 @@
-import path from 'path';
 import yaml from 'js-yaml';
-import { readContent } from './helpers.js';
 
-const parseContent = (filePath) => {
-  const format = path.extname(filePath).slice(1);
+const parseContent = (content, format) => {
+  // console.log(content)
   switch (format) {
     case 'json':
-      return JSON.parse(readContent(filePath));
+      return JSON.parse(content);
     case 'yaml':
     case 'yml':
-      return yaml.load(readContent(filePath));
+      return yaml.load(content);
     default:
-      return JSON.parse(readContent(filePath));
+      return JSON.parse(content);
   }
 };
 

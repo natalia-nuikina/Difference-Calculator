@@ -6,10 +6,10 @@ import parseContent from '../src/parsers.js';
 
 const readContent = (fileName) => fs.readFileSync(getFixturePath(fileName), 'utf-8');
 
-const jsonContent1 = parseContent(getFixturePath('file3.json'));
-const jsonContent2 = parseContent(getFixturePath('file4.json'));
-const yamlContent1 = parseContent(getFixturePath('file3.yml'));
-const yamlContent2 = parseContent(getFixturePath('file4.yml'));
+const jsonContent1 = parseContent(readContent('file3.json'), 'json');
+const jsonContent2 = parseContent(readContent('file4.json'), 'json');
+const yamlContent1 = parseContent(readContent('file3.yml'), 'yml');
+const yamlContent2 = parseContent(readContent('file4.yml'), 'yml');
 
 const diffJson = genDiff(jsonContent1, jsonContent2);
 const diffYaml = genDiff(yamlContent1, yamlContent2);

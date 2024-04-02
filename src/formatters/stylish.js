@@ -4,8 +4,7 @@ import { getLine } from '../helpers.js';
 const stringify = (value, depth) => {
   const iter = (obj, depthIter) => {
     const tab = '  ';
-    const indent = tab.repeat(depthIter * 2 + 2);
-    const bracketIndent = tab.repeat(depthIter * 2);
+    const indent = tab.repeat(depthIter * 2);
     if (!_.isObject(obj)) {
       return obj;
     }
@@ -13,12 +12,12 @@ const stringify = (value, depth) => {
     const sortedKeys = keys.toSorted();
     const lines = sortedKeys.map((item) => {
       const currentValue = obj[item];
-      return `${indent}${item}: ${stringify(currentValue, depthIter + 1)}`;
+      return `    ${indent}${item}: ${stringify(currentValue, depthIter + 1)}`;
     });
     return [
       '{',
       ...lines,
-      `${bracketIndent}}`,
+      `${indent}}`,
     ].join('\n');
   };
   return iter(value, depth);
@@ -26,10 +25,8 @@ const stringify = (value, depth) => {
 
 const stylish = (difference, replacer = '  ', spacesCount = 2) => {
   const iter = (diff, depth) => {
-    const leftShiftLine = 1;
-    const leftShiftBracket = 2;
+    const leftShiftLine = 2;
     const indent = replacer.repeat(depth * spacesCount - leftShiftLine);
-    const bracketIndent = replacer.repeat(depth * spacesCount - leftShiftBracket);
     const lines = diff
       .map((item) => {
         const charMinus = '-';
@@ -53,7 +50,7 @@ const stylish = (difference, replacer = '  ', spacesCount = 2) => {
     return [
       '{',
       ...lines,
-      `${bracketIndent}}`,
+      `${indent}}`,
     ].join('\n');
   };
   return iter(difference, 1);
