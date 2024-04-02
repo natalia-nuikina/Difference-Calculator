@@ -11,20 +11,14 @@ const filePath3 = getFixturePath('file3.yml');
 const filePath4 = getFixturePath('file4.yml');
 const diff = genDiff(getFixturePath('file3.json'), getFixturePath('file4.json'));
 
-test('genDiffStylish', () => {
-  expect(chooseFormater(filePath1, filePath2, diff, 'stylish')).toBe(readContent('file2.test.txt'));
-  expect(chooseFormater(filePath3, filePath4, diff, 'stylish')).toBe(readContent('file2.test.txt'));
-  expect(chooseFormater(filePath1, filePath4, diff, 'stylish')).toBe(readContent('file2.test.txt'));
-});
-
-test('genDiffPlain', () => {
-  expect(chooseFormater(filePath1, filePath2, diff, 'plain')).toBe(readContent('plain.test.txt'));
-  expect(chooseFormater(filePath3, filePath4, diff, 'plain')).toBe(readContent('plain.test.txt'));
-  expect(chooseFormater(filePath1, filePath4, diff, 'plain')).toBe(readContent('plain.test.txt'));
-});
-
-test('genDiffJson', () => {
-  expect(chooseFormater(filePath1, filePath2, diff, 'json')).toBe(readContent('json.test.json'));
-  expect(chooseFormater(filePath3, filePath4, diff, 'json')).toBe(readContent('json.test.json'));
-  expect(chooseFormater(filePath1, filePath4, diff, 'json')).toBe(readContent('json.test.json'));
+describe('genDiff', () => {
+  test.each([
+    [filePath1, filePath2, diff],
+    [filePath3, filePath4, diff],
+    [filePath1, filePath4, diff],
+  ])('.genDiff(%p, %p)', (a, b, c) => {
+    expect(chooseFormater(a, b, c, 'stylish')).toBe(readContent('file2.test.txt'));
+    expect(chooseFormater(a, b, c, 'plain')).toBe(readContent('plain.test.txt'));
+    expect(chooseFormater(a, b, c, 'json')).toBe(readContent('json.test.json'));
+  });
 });
