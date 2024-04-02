@@ -10,8 +10,7 @@
   "dependencies": {
     "commander": "^12.0.0",
     "js-yaml": "^4.1.0",
-    "lodash": "^4.17.21",
-    "pretty-format": "^29.7.0"
+    "lodash": "^4.17.21"
   },
   "bin": {
     "gendiff": "bin/gendiff.js"

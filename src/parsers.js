@@ -1,7 +1,6 @@
 import yaml from 'js-yaml';
 
 const parseContent = (content, format) => {
-  // console.log(content)
   switch (format) {
     case 'json':
       return JSON.parse(content);
