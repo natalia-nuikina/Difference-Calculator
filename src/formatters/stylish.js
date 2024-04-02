@@ -1,6 +1,28 @@
-import {
-  getLine, getString, getName, getChildren, getType, getValueFile1, getValueFile2, getValue,
-} from '../helpers.js';
+import _ from 'lodash';
+import { getLine } from '../helpers.js';
+
+const stringify = (value, depth) => {
+  const iter = (obj, depthIter) => {
+    const tab = '  ';
+    const indent = tab.repeat(depthIter * 2 + 2);
+    const bracketIndent = tab.repeat(depthIter * 2);
+    if (!_.isObject(obj)) {
+      return obj;
+    }
+    const keys = Object.keys(obj);
+    const sortedKeys = keys.toSorted();
+    const lines = sortedKeys.map((item) => {
+      const currentValue = obj[item];
+      return `${indent}${item}: ${stringify(currentValue, depthIter + 1)}`;
+    });
+    return [
+      '{',
+      ...lines,
+      `${bracketIndent}}`,
+    ].join('\n');
+  };
+  return iter(value, depth);
+};
 
 const stylish = (difference, replacer = '  ', spacesCount = 2) => {
   const iter = (diff, depth) => {
@@ -13,21 +35,19 @@ const stylish = (difference, replacer = '  ', spacesCount = 2) => {
         const charMinus = '-';
         const charPlus = '+';
         const charNull = ' ';
-        // const children = getChildren(item);
-        const value = getValue(item);
-        switch (getType(item)) {
+        switch (item.type) {
           case 'removed':
-            return getLine(indent, getName(item), charMinus, getString(value, depth));
+            return getLine(indent, item.name, charMinus, stringify(item.value, depth));
           case 'added':
-            return getLine(indent, getName(item), charPlus, getString(value, depth));
+            return getLine(indent, item.name, charPlus, stringify(item.value, depth));
           case 'unchanged':
-            return getLine(indent, getName(item), charNull, getString(value, depth));
+            return getLine(indent, item.name, charNull, stringify(item.value, depth));
           case 'updated':
-            return `${getLine(indent, getName(item), charMinus, getString(getValueFile1(item), depth))}\n${getLine(indent, getName(item), charPlus, getString(getValueFile2(item), depth))}`;
+            return `${getLine(indent, item.name, charMinus, stringify(item.value.file1, depth))}\n${getLine(indent, item.name, charPlus, stringify(item.value.file2, depth))}`;
           case 'updatedInside':
-            return getLine(indent, getName(item), charNull, iter(getChildren(item), depth + 1));
+            return getLine(indent, item.name, charNull, iter(item.children, depth + 1));
           default:
-            throw new Error(`Unknown order state: '${getType(item)}'!`);
+            throw new Error(`Unknown order state: '${item.type}'!`);
         }
       });
     return [

@@ -6,7 +6,7 @@ const start = (filePath1, filePath2, formatName) => {
   const currentContent1 = parseContent(filePath1);
   const currentContent2 = parseContent(filePath2);
   const diff = genDiff(currentContent1, currentContent2);
-  return chooseFormater(filePath1, filePath2, diff, formatName);
+  return chooseFormater(diff, formatName);
 };
 
 export default start;

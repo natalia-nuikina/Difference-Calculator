@@ -2,7 +2,7 @@ import stylish from './stylish.js';
 import plain from './plain.js';
 import json from './json.js';
 
-const chooseFormater = (filePath1, filePath2, diff, formatName) => {
+const chooseFormater = (diff, formatName) => {
   switch (formatName) {
     case 'plain':
       return plain(diff);
