@@ -19,7 +19,5 @@ genDiff -h
 ```
 
 ### Asciinema:
-[![Step 6](https://asciinema.org/a/BWsWT521LsXHAeUEvE3eXrLGs.svg)](https://asciinema.org/a/BWsWT521LsXHAeUEvE3eXrLGs)
-[![Step 7](https://asciinema.org/a/keQ7760FKrEsyCpjnX4Nv7NAx.svg)](https://asciinema.org/a/keQ7760FKrEsyCpjnX4Nv7NAx)
 [![Step 8](https://asciinema.org/a/420Bnw3nPnZaNej06l6ofhn5u.svg)](https://asciinema.org/a/420Bnw3nPnZaNej06l6ofhn5u)
 [![Step 9 DEMO genDiff](https://asciinema.org/a/uBgzTwojOu3lQCKTKcHD2o6HD.svg)](https://asciinema.org/a/uBgzTwojOu3lQCKTKcHD2o6HD)

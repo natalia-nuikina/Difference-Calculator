@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/natalia-nuikina/frontend-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/natalia-nuikina/frontend-project-46/actions)",
+  "description": "Compares two configuration files and shows a difference.",
   "scripts": {
     "test": "jest"
   },
