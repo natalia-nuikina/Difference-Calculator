@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import { getLine } from '../helpers.js';
 
 const stringify = (value, depth) => {
   const iter = (obj, depthIter) => {
@@ -23,26 +22,24 @@ const stringify = (value, depth) => {
   return iter(value, depth);
 };
 
-const stylish = (difference, replacer = '  ', spacesCount = 2) => {
+const stylish = (difference) => {
   const iter = (diff, depth) => {
     const leftShiftLine = 2;
-    const indent = replacer.repeat(depth * spacesCount - leftShiftLine);
+    const spacesCount = 2;
+    const indent = '  '.repeat(depth * spacesCount - leftShiftLine);
     const lines = diff
       .map((item) => {
-        const charMinus = '-';
-        const charPlus = '+';
-        const charNull = ' ';
         switch (item.type) {
           case 'removed':
-            return getLine(indent, item.name, charMinus, stringify(item.value, depth));
+            return `  ${indent}- ${item.name}: ${stringify(item.value, depth)}`;
           case 'added':
-            return getLine(indent, item.name, charPlus, stringify(item.value, depth));
+            return `  ${indent}+ ${item.name}: ${stringify(item.value, depth)}`;
           case 'unchanged':
-            return getLine(indent, item.name, charNull, stringify(item.value, depth));
+            return `  ${indent}  ${item.name}: ${stringify(item.value, depth)}`;
           case 'updated':
-            return `${getLine(indent, item.name, charMinus, stringify(item.value.file1, depth))}\n${getLine(indent, item.name, charPlus, stringify(item.value.file2, depth))}`;
+            return `  ${indent}- ${item.name}: ${stringify(item.value.file1, depth)}\n  ${indent}+ ${item.name}: ${stringify(item.value.file2, depth)}`;
           case 'updatedInside':
-            return getLine(indent, item.name, charNull, iter(item.children, depth + 1));
+            return `  ${indent}  ${item.name}: ${iter(item.children, depth + 1)}`;
           default:
             throw new Error(`Unknown order state: '${item.type}'!`);
         }

@@ -8,7 +8,7 @@ const parseContent = (content, format) => {
     case 'yml':
       return yaml.load(content);
     default:
-      return JSON.parse(content);
+      throw new Error(`Format: '${format}' not found!`);
   }
 };
 
