@@ -1,13 +1,12 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
 
-const chooseFormater = (diff, formatName) => {
+const chooseFormater = (diff, formatName = stylish) => {
   switch (formatName) {
     case 'plain':
       return plain(diff);
     case 'json':
       return JSON.stringify(diff);
-    case '':
     case 'stylish':
       return stylish(diff);
     default:
