@@ -7,6 +7,7 @@ const chooseFormater = (diff, formatName) => {
       return plain(diff);
     case 'json':
       return JSON.stringify(diff);
+    case '':
     case 'stylish':
       return stylish(diff);
     default:
