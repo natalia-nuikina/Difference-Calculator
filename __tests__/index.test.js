@@ -5,8 +5,6 @@ import chooseFormater from '../src/formatters/index.js';
 import { getFixturePath } from '../src/helpers.js';
 import parseContent from '../src/parsers.js';
 
-// const readContent = (fileName) => fs.readFileSync(getFixturePath(fileName), 'utf-8');
-
 describe('genDiff', () => {
   test.each([
     [getFixturePath('file1.json'), getFixturePath('file2.json'), 'stylish', getFixturePath('stylish.test.txt')],
