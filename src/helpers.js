@@ -8,4 +8,4 @@ export const getFixturePath = (fileName) => {
   return join(__dirname, '..', '__fixtures__', fileName);
 };
 
-export const readContent = (filePath) => fs.readFileSync(resolve(process.cwd(), filePath));
+export const readContent = (filePath) => fs.readFileSync(resolve(process.cwd(), filePath), 'utf-8');
