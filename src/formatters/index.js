@@ -1,7 +1,7 @@
 import stylish from './stylish.js';
 import plain from './plain.js';
 
-const chooseFormater = (diff, formatName = 'stylish') => {
+const chooseFormater = (diff, formatName) => {
   switch (formatName) {
     case 'plain':
       return plain(diff);
@@ -10,7 +10,7 @@ const chooseFormater = (diff, formatName = 'stylish') => {
     case 'stylish':
       return stylish(diff);
     default:
-      throw new Error(`Format: '${formatName}' not found!`);
+      throw new Error('Select formatter name!');
   }
 };
 

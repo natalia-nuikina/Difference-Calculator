@@ -4,7 +4,7 @@ import chooseFormater from './formatters/index.js';
 import parseContent from './parsers.js';
 import { readContent } from './helpers.js';
 
-const start = (filePath1, filePath2, formatName) => {
+const start = (filePath1, filePath2, formatName = 'stylish') => {
   const format1 = path.extname(filePath1).slice(1);
   const format2 = path.extname(filePath1).slice(1);
 

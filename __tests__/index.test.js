@@ -7,16 +7,19 @@ import parseContent from '../src/parsers.js';
 
 describe('genDiff', () => {
   test.each([
-    [getFixturePath('file1.json'), getFixturePath('file2.json'), 'stylish', getFixturePath('stylish.test.txt')],
-    [getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'stylish', getFixturePath('stylish.test.txt')],
-    [getFixturePath('file1.json'), getFixturePath('file2.yml'), 'stylish', getFixturePath('stylish.test.txt')],
-    [getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain', getFixturePath('plain.test.txt')],
-    [getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'plain', getFixturePath('plain.test.txt')],
-    [getFixturePath('file1.json'), getFixturePath('file2.yml'), 'plain', getFixturePath('plain.test.txt')],
-    [getFixturePath('file1.json'), getFixturePath('file2.json'), 'json', getFixturePath('json.test.json')],
-    [getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'json', getFixturePath('json.test.json')],
-    [getFixturePath('file1.json'), getFixturePath('file2.yml'), 'json', getFixturePath('json.test.json')],
-  ])('.genDiff', (path1, path2, formatName, path3) => {
+    ['file1.json', 'file2.json', 'stylish', 'stylish.test.txt'],
+    ['file1.yml', 'file2.yml', 'stylish', 'stylish.test.txt'],
+    ['file1.json', 'file2.yml', 'stylish', 'stylish.test.txt'],
+    ['file1.json', 'file2.json', 'plain', 'plain.test.txt'],
+    ['file1.yml', 'file2.yml', 'plain', 'plain.test.txt'],
+    ['file1.json', 'file2.yml', 'plain', 'plain.test.txt'],
+    ['file1.json', 'file2.json', 'json', 'json.test.json'],
+    ['file1.yml', 'file2.yml', 'json', 'json.test.json'],
+    ['file1.json', 'file2.yml', 'json', 'json.test.json'],
+  ])('.genDiff', (fileName1, fileName2, formatName, fileName3) => {
+    const path1 = getFixturePath(fileName1);
+    const path2 = getFixturePath(fileName2);
+    const path3 = getFixturePath(fileName3);
     const content1 = parseContent(fs.readFileSync(path1), path.extname(path1).slice(1));
     const content2 = parseContent(fs.readFileSync(path2), path.extname(path2).slice(1));
     const diff = genDiff(content1, content2);

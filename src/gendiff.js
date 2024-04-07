@@ -18,7 +18,9 @@ const genDiff = (currentContent1, currentContent2) => {
         return { name: key, type: 'unchanged', value: content1[key] };
       }
       if (!_.isEqual(content1[key], content2[key])) {
-        return { name: key, type: 'updated', value: { file1: content1[key], file2: content2[key] } };
+        return {
+          name: key, type: 'updated', value1: content1[key], value2: content2[key],
+        };
       }
       throw new Error(`The key: '${key}' not found in files!`);
     });

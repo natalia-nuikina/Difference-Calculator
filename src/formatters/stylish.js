@@ -37,7 +37,7 @@ const stylish = (difference) => {
           case 'unchanged':
             return `  ${indent}  ${item.name}: ${stringify(item.value, depth)}`;
           case 'updated':
-            return `  ${indent}- ${item.name}: ${stringify(item.value.file1, depth)}\n  ${indent}+ ${item.name}: ${stringify(item.value.file2, depth)}`;
+            return `  ${indent}- ${item.name}: ${stringify(item.value1, depth)}\n  ${indent}+ ${item.name}: ${stringify(item.value2, depth)}`;
           case 'updatedInside':
             return `  ${indent}  ${item.name}: ${iter(item.children, depth + 1)}`;
           default:

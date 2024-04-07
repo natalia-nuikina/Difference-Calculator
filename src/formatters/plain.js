@@ -19,7 +19,7 @@ const plain = (difference) => {
           case 'added':
             return `Property '${depth}${item.name}' was ${item.type} with value: ${stringify(item.value)}`;
           case 'updated':
-            return `Property '${depth}${item.name}' was ${item.type}. From ${stringify(item.value.file1)} to ${stringify(item.value.file2)}`;
+            return `Property '${depth}${item.name}' was ${item.type}. From ${stringify(item.value1)} to ${stringify(item.value2)}`;
           case 'unchanged':
             return [];
           case 'updatedInside':
