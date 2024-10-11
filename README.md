@@ -5,7 +5,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c81eb14305b98f519de9/test_coverage)](https://codeclimate.com/github/natalia-nuikina/frontend-project-46/test_coverage)
 
 ### Описание:
-Вычислитель отличий – приложение, определяющая разницу между двумя структурами данных.
+Вычислитель отличий – приложение, определяющая разницу между двумя JSON/YAML файлами.
 ##### Возможности утилиты:
 - Поддержка разных входных форматов: yaml, json
 - Генерация отчета в виде plain text, stylish и json
